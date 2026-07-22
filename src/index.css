@@ -47,3 +47,46 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+/* Navbar & Footer Styles */
+.navbar {
+  border-bottom: var(--border-size-1) solid var(--border-subtle);
+  background-color: var(--bg-main);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.nav-container {
+  max-width: var(--size-content-3);
+  margin-inline: auto;
+  padding: var(--size-3) var(--size-5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-brand {
+  font-weight: var(--font-weight-7);
+  color: var(--text-heading);
+  text-decoration: none;
+}
+
+.nav-links a {
+  margin-left: var(--size-4);
+  color: var(--text-muted);
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+}
+
+.footer {
+  max-width: var(--size-content-3);
+  margin-inline: auto;
+  padding: var(--size-6) var(--size-5);
+  border-top: var(--border-size-1) solid var(--border-subtle);
+  color: var(--text-muted);
+  font-size: var(--font-size-0);
+  text-align: center;
+}
