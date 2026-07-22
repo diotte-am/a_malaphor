@@ -1,184 +1,145 @@
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
+/* src/index.css */
+@import "open-props/style";
+@import "open-props/normalize";
+@import "open-props/theme.dark";
 
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
+/* Custom theme overrides using Open Props tokens */
+:root {
+  /* Surface layers for dark mode depth */
+  --bg-main: var(--gray-12);        /* Deep slate background (#0f172a / dark gray) */
+  --bg-surface: var(--gray-11);     /* Slightly lighter card surface */
+  --bg-surface-hover: var(--gray-10);
+
+  /* Typography tokens */
+  --text-heading: var(--gray-1);    /* Crisp off-white */
+  --text-body: var(--gray-3);       /* High contrast readable gray */
+  --text-muted: var(--gray-5);      /* Soft gray for dates/tags */
+
+  /* Accent & Border tokens */
+  --accent: var(--cyan-5);          /* Electric accent for links/highlights */
+  --border-subtle: var(--gray-9);   /* Minimal subtle dividers */
+  
+  /* Fonts */
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
 }
 
-.hero {
-  position: relative;
-
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
-
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
-
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
-  }
-}
-
-#center {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
-
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
-  }
-}
-
-#next-steps {
-  display: flex;
-  border-top: 1px solid var(--border);
-  text-align: left;
-
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
-  }
-
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
-#docs {
-  border-right: 1px solid var(--border);
-
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
-}
-
-#next-steps ul {
-  list-style: none;
+body {
+  background-color: var(--bg-main);
+  color: var(--text-body);
+  font-family: var(--font-sans);
+  line-height: var(--font-lineheight-3);
+  margin: 0;
   padding: 0;
+}
+
+h1, h2, h3, h4 {
+  color: var(--text-heading);
+  font-weight: var(--font-weight-6);
+  letter-spacing: var(--font-letterspacing-1);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.2s var(--ease-2);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Layout Constraints */
+.layout-container {
+  max-width: var(--size-content-3); /* ~768px reading line length */
+  margin-inline: auto;
+  padding: var(--size-5);
+}
+
+.hero-section {
+  margin-block-end: var(--size-8);
+}
+
+.hero-section h1 {
+  font-size: var(--font-size-6);
+  margin-block-end: var(--size-2);
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: var(--font-size-3);
+  margin: 0;
+}
+
+.section-block {
+  margin-block-end: var(--size-8);
+}
+
+/* Card Styles */
+.content-card, .list-item-card {
+  background-color: var(--bg-surface);
+  border: var(--border-size-1) solid var(--border-subtle);
+  border-radius: var(--radius-2);
+  padding: var(--size-4);
+  margin-block-end: var(--size-4);
+  transition: transform 0.2s var(--ease-2), border-color 0.2s var(--ease-2);
+}
+
+.content-card:hover, .list-item-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+
+.card-actions {
+  margin-block-start: var(--size-3);
+}
+
+/* Post Meta & List Layouts */
+.post-header {
   display: flex;
-  gap: 8px;
-  margin: 32px 0 0;
-
-  .logo {
-    height: 18px;
-  }
-
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
-
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-  }
+  justify-content: space-between;
+  align-items: baseline;
 }
 
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
+.post-header time, .post-meta time {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-0);
+  color: var(--text-muted);
 }
 
-.ticks {
-  position: relative;
-  width: 100%;
+/* Tag Pills */
+.tag-group {
+  margin-block-start: var(--size-2);
+}
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
-  }
+.tag-group.inline {
+  display: inline-flex;
+}
 
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
-  }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
-  }
+.tag {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-0);
+  color: var(--text-muted);
+  background-color: var(--bg-main);
+  padding: var(--size-1) var(--size-2);
+  border-radius: var(--radius-1);
+  border: var(--border-size-1) solid var(--border-subtle);
+  margin-right: var(--size-2);
+}
+
+/* Markdown Article Specifics */
+.post-meta-header {
+  margin-block-end: var(--size-6);
+  border-bottom: var(--border-size-1) solid var(--border-subtle);
+  padding-bottom: var(--size-4);
+}
+
+.dot-divider {
+  margin-inline: var(--size-2);
+  color: var(--text-muted);
+}
+
+.lead-paragraph {
+  font-size: var(--font-size-3);
+  color: var(--text-heading);
 }
