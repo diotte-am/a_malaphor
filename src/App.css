@@ -1,7 +1,7 @@
 /* src/index.css */
 @import "open-props/style";
 @import "open-props/normalize";
-@import "open-props/theme.dark";
+
 
 /* Custom theme overrides using Open Props tokens */
 :root {
