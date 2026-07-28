@@ -1,0 +1,81 @@
+{
+  "home": {
+    "title": "a_malaphor",
+    "description": "Welcome to my personal site. Bridging a background in graphic design with a Master's in Computer Science to explore code, creative arts, and technical tools.",
+    "items": [
+      {
+        "name": "Explore Code",
+        "summary": "Architectural pipelines, backend scripts, and data repositories.",
+        "url": "/code"
+      },
+      {
+        "name": "Explore Make",
+        "summary": "A general art blog tracking digital design, painting, fiber art, and more.",
+        "url": "/make"
+      }
+    ]
+  },
+  "code": {
+    "title": "Code",
+    "description": "Architectural pipelines, backend scripts, data tools, and experimental repositories built with Python, JavaScript, and Neo4j graph databases.",
+    "items": [
+      {
+        "name": "Entity Graph Extraction Pipeline",
+        "summary": "Multi-iteration transcript parsing and knowledge graph extraction.",
+        "githubUrl": "https://github.com/diotte-am/weird-little-pipeline",
+        "pagesUrl": "Dashboard coming soon.",
+        "url": "/code/graph-pipeline",
+        "iterations": [
+          { "version": "v2.0 (Current)", "file": "WLP_2" },
+          { "version": "v1.0 (Initial Prototype)", "file": "WLP_1" }
+        ]
+      },
+      {
+        "name": "Malden Community Coalition",
+        "summary": "A website for the Malden Community Coalition, a local community organization and non-profit I am involved with.",
+        "githubUrl": "https://github.com/diotte-am/malden-community-coalition",
+        "pagesUrl": "https://maldencommunitycoalition.org",
+        "url": "/code/malden-coalition",
+        "file": "MCoCo_1"
+      }
+    ]
+  },
+  "make": {
+    "title": "Make",
+    "description": "A general art blog. Drawing on 12 years of professional background as a graphic designer before transitioning into computer science, this space is dedicated to fulfillment across various creative mediums—digital design, painting, illustration, fiber arts, and cooking.",
+    "items": [
+      {
+        "name": "Recent Fiber Art Study",
+        "summary": "Exploring texture and color palettes through structural weaving.",
+        "url": "/make/fiber-art-study"
+      },
+      {
+        "name": "Digital Illustration & Layouts",
+        "summary": "Vector experiments merging traditional graphic composition with modern web tokens.",
+        "url": "/make/digital-illustrations"
+      }
+    ]
+  },
+  "teach": {
+    "title": "Teach",
+    "description": "Tutorials, technical write-ups, and guides covering software debugging, tool configurations, and development workflows.",
+    "items": [
+      {
+        "name": "Building Local LLM Knowledge Graphs",
+        "summary": "Handling model constraints and file system permissions when parsing text transcripts.",
+        "url": "/teach/llm-graphs"
+      }
+    ]
+  },
+  "collaborate": {
+    "title": "Collaborate",
+    "description": "Get in touch regarding technical infrastructure, data operations, web development projects, or community initiatives.",
+    "items": [
+      {
+        "name": "Malden Community Coalition",
+        "summary": "Volunteering on technical infrastructure, web apps, and public platform features.",
+        "url": "/collaborate/malden"
+      }
+    ]
+  }
+}

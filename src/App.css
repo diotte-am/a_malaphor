@@ -143,3 +143,28 @@ a:hover {
   font-size: var(--font-size-3);
   color: var(--text-heading);
 }
+
+/* Prevent any markdown content or code blocks from overflowing horizontally */
+.markdown-body {
+  overflow-x: auto;
+  word-break: break-word;
+}
+
+/* Make all body text inside markdown containers smaller */
+.markdown-body p, 
+.markdown-body ul, 
+.markdown-body ol {
+  font-size: var(--font-size-1); /* Adjusted down from body default */
+  line-height: var(--font-lineheight-4);
+  color: var(--text-body);
+  margin-block-end: var(--size-4);
+}
+
+/* Add more vertical space under headers inside markdown */
+.markdown-body h1, 
+.markdown-body h2, 
+.markdown-body h3 {
+  color: var(--text-heading);
+  margin-block-start: var(--size-7);  /* Generous space above */
+  margin-block-end: var(--size-5);    /* Increased vertical space below */
+}

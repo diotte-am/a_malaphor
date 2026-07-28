@@ -5,7 +5,7 @@
 /* Custom theme overrides using Open Props tokens */
 :root {
   /* Surface layers for dark mode depth */
-  --bg-main: var(--gray-12);        /* Deep slate background (#0f172a / dark gray) */
+  --bg-main: var(--gray-12);        /* Deep slate background */
   --bg-surface: var(--gray-11);     /* Slightly lighter card surface */
   --bg-surface-hover: var(--gray-10);
 
@@ -66,19 +66,43 @@ a:hover {
   align-items: center;
 }
 
+/* Courier font for a_malaphor, pushed to the left */
 .nav-brand {
+  font-family: courier, monospace;
+  font-size: var(--font-size-4);
   font-weight: var(--font-weight-7);
   color: var(--text-heading);
   text-decoration: none;
+  letter-spacing: var(--font-letterspacing-1);
+}
+
+.nav-brand:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* Tightened spacing, pushed entirely to the right */
+.nav-links {
+  display: flex;
+  gap: var(--size-4); 
+  margin-left: auto;
 }
 
 .nav-links a {
-  margin-left: var(--size-4);
   color: var(--text-muted);
+  text-decoration: none;
+  font-size: var(--font-size-0);
+  transition: opacity 0.2s var(--ease-2), color 0.2s var(--ease-2);
 }
 
 .nav-links a:hover {
   color: var(--accent);
+}
+
+/* Active page style in navbar: turned down opacity */
+.nav-links a.active {
+  opacity: 0.4;
+  color: var(--text-heading);
 }
 
 .footer {
@@ -89,4 +113,273 @@ a:hover {
   color: var(--text-muted);
   font-size: var(--font-size-0);
   text-align: center;
+}
+
+/* Page Container Padding (Prevents cards from hitting screen edges) */
+.layout-container {
+  max-width: var(--size-content-3);
+  margin-inline: auto;
+  padding-inline: var(--size-5);
+  padding-block: var(--size-6);
+}
+
+/* Page Titles (Free-standing, no card wrapper) */
+.page-header {
+  margin-block-end: var(--size-6);
+}
+
+.page-header h1 {
+  font-size: var(--font-size-6);
+  color: var(--text-heading);
+  margin: 0;
+}
+
+/* Subtle Cards for Content */
+.subtle-card {
+  background-color: var(--bg-surface);
+  border: var(--border-size-1) solid var(--border-subtle);
+  border-radius: var(--radius-3);
+  padding: var(--size-6);
+  margin-block-end: var(--size-5);
+  box-shadow: var(--shadow-1);
+}
+
+.main-content {
+  min-height: 70vh;
+  padding-block: var(--size-6);
+}
+
+/* Reusable Page Layout & Item Cards */
+.page-description {
+  font-size: var(--font-size-2);
+  color: var(--text-body);
+  margin: 0;
+  line-height: var(--font-lineheight-3);
+}
+
+.item-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-4);
+  margin-block-start: var(--size-6);
+}
+
+.item-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s var(--ease-2), border-color 0.2s var(--ease-2);
+}
+
+.item-card-link:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  text-decoration: none;
+}
+
+.item-card-link h3 {
+  color: var(--text-heading);
+  margin-block-end: var(--size-2);
+}
+
+.item-card-link p {
+  color: var(--text-muted);
+  font-size: var(--font-size-1);
+  margin-block-end: var(--size-3);
+}
+
+.item-action {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-0);
+  color: var(--accent);
+}
+
+.multi-iter-layout {
+  max-width: var(--size-content-4); /* Slightly wider to fit the side menu */
+}
+
+.project-container {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: var(--size-6);
+  align-items: start;
+}
+
+/* Sticky indicator sidebar */
+.iteration-nav-sidebar {
+  position: sticky;
+  top: calc(var(--size-7) + 40px);
+  background-color: var(--bg-surface);
+  border: var(--border-size-1) solid var(--border-subtle);
+  border-radius: var(--radius-3);
+  padding: var(--size-4);
+}
+
+.iteration-nav-sidebar h3 {
+  font-size: var(--font-size-1);
+  color: var(--text-heading);
+  margin-block-end: var(--size-3);
+}
+
+.iteration-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-2);
+}
+
+.iteration-jump-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-0);
+  text-align: left;
+  cursor: pointer;
+  padding: var(--size-2);
+  width: 100%;
+  border-radius: var(--radius-2);
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.iteration-jump-btn:hover {
+  background-color: var(--bg-surface-hover);
+  color: var(--accent);
+}
+
+/* Continuous feed stack */
+.iteration-feed {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-6);
+}
+
+.iteration-section {
+  position: relative;
+  scroll-margin-top: var(--size-8); /* Ensures header isn't hidden under sticky navbar when jumped to */
+}
+
+.iteration-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-0);
+  color: var(--accent);
+  background-color: var(--bg-main);
+  padding: var(--size-1) var(--size-3);
+  border-radius: var(--radius-pill);
+  border: var(--border-size-1) solid var(--border-subtle);
+  margin-block-end: var(--size-4);
+}
+
+/* Responsive fallback for mobile screens */
+@media (max-width: 768px) {
+  .project-container {
+    grid-template-columns: 1fr;
+  }
+  .iteration-nav-sidebar {
+    position: relative;
+    top: 0;
+  }
+}
+
+/* Make all body text inside markdown containers smaller */
+.markdown-body p, 
+.markdown-body ul, 
+.markdown-body ol {
+  font-size: var(--font-size-1); /* Adjusted down from body default */
+  line-height: var(--font-lineheight-4);
+  color: var(--text-body);
+  margin-block-end: var(--size-4);
+}
+
+/* Add more vertical space under headers inside markdown */
+.markdown-body h1, 
+.markdown-body h2, 
+.markdown-body h3 {
+  color: var(--text-heading);
+  margin-block-start: var(--size-7);  /* Generous space above */
+  margin-block-end: var(--size-5);    /* Increased vertical space below */
+}
+
+/* Prevent any markdown content or code blocks from overflowing horizontally */
+.markdown-body {
+  overflow-x: auto;
+  word-break: break-word;
+}
+
+.markdown-body pre, 
+.markdown-body code {
+  max-width: 100%;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* Ensure the main multi-iteration grid stays strictly within bounds */
+.multi-iter-layout {
+  max-width: var(--size-content-4);
+  overflow-x: hidden;
+}
+
+.project-container {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr); /* minmax(0, 1fr) stops flex/grid blowouts */
+  gap: var(--size-6);
+  align-items: start;
+}
+
+/* Enable smooth scrolling globally to prevent jarring layout snaps */
+html {
+  scroll-behavior: smooth;
+}
+
+.iteration-section {
+  scroll-margin-top: calc(var(--size-8) + 20px); /* Keeps headers clear of the sticky navbar */
+}
+
+.detail-top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-block-end: var(--size-4);
+  flex-wrap: wrap;
+  gap: var(--size-3);
+}
+
+/* GitHub & Live Pages Badge Header */
+.project-links-badge {
+  display: flex;
+  gap: var(--size-3);
+}
+
+.repo-link {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-0);
+  background-color: var(--bg-surface);
+  border: var(--border-size-1) solid var(--border-subtle);
+  padding: var(--size-2) var(--size-3);
+  border-radius: var(--radius-pill);
+  color: var(--text-heading);
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.repo-link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* Fully Sticky Iteration Sidebar */
+.iteration-nav-sidebar {
+  position: sticky;
+  /* Matches top navbar height plus breathing room */
+  top: calc(var(--size-7) + 20px); 
+  background-color: var(--bg-surface);
+  border: var(--border-size-1) solid var(--border-subtle);
+  border-radius: var(--radius-3);
+  padding: var(--size-4);
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
 }

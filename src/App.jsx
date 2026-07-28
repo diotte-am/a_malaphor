@@ -4,28 +4,26 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
-import PostDetail from './pages/PostDetail';
-
-// Simple, minimal 404 component directly in the file
-function NotFound() {
-  return (
-    <div className="layout-container">
-      <h2>404 - Page Not Found</h2>
-      <p>The page or article you are looking for doesn't exist.</p>
-      <a href="#/">&larr; Return to Home</a>
-    </div>
-  );
-}
+import Code from './pages/Code';
+import Make from './pages/Make';
+import Teach from './pages/Teach';
+import Collaborate from './pages/Collaborate';
+import PostDetail from './pages/PostDetail'; // <--- Make sure this is imported
 
 export default function App() {
   return (
     <div className="app-shell">
       <Navbar />
-      <main>
+      <main className="main-content">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/writing" element={<PostDetail />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="/code" element={<Code />} />
+          <Route path="/make" element={<Make />} />
+          <Route path="/teach" element={<Teach />} />
+          <Route path="/collaborate" element={<Collaborate />} />
+          
+          {/* This dynamic route handles all /category/slug details */}
+          <Route path="/:category/:slug" element={<PostDetail />} />
         </Routes>
       </main>
       <Footer />
