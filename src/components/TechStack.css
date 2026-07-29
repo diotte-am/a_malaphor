@@ -1,0 +1,17 @@
+.card-top-left-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--size-2, 0.5rem);
+  margin-bottom: 2rem;
+  max-width: calc(100% - 120px);
+}
+
+.tech-badge {
+  background-color: var(--surface-2, #f1f5f9);
+  color: var(--text-2, #334155);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-pill, 9999px);
+  font-size: var(--font-size-0, 0.875rem);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}

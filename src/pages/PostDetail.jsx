@@ -23,7 +23,7 @@ export default function PostDetail() {
       const filePath = `../content/${category}/${project.file}.md`;
       if (markdownFiles[filePath]) {
         markdownFiles[filePath]().then((text) => {
-          setContentList([{ id: project.file, text }]);
+          setContentList([{ id: project.file, text, stack: project.stack }]);
           setLoading(false);
         });
       } else {
@@ -36,9 +36,9 @@ export default function PostDetail() {
           const filePath = `../content/${category}/${iter.file}.md`;
           if (markdownFiles[filePath]) {
             const text = await markdownFiles[filePath]();
-            return { version: iter.version, id: iter.file, text };
+            return { version: iter.version, id: iter.file, text, stack: iter.stack || project.stack };
           }
-          return { version: iter.version, id: iter.file, text: '*Iteration content missing.*' };
+          return { version: iter.version, id: iter.file, text: '*Iteration content missing.*', stack: iter.stack || project.stack };
         })
       ).then((results) => {
         setContentList(results);
@@ -60,7 +60,7 @@ export default function PostDetail() {
   };
 
   return (
-    <div className={`layout-container ${project.iterations ? 'multi-iter-layout' : ''}`}>
+    <div className={`layout-container detail-page-container ${project.iterations ? 'multi-iter-layout' : ''}`}>
       <div className="detail-top-nav">
         <Link to={`/${category}`} className="back-link">&larr; Back to {category}</Link>
         
@@ -105,7 +105,20 @@ export default function PostDetail() {
         <div className="iteration-feed">
           {contentList.map((item) => (
             <section key={item.id} id={item.id} className="subtle-card markdown-body iteration-section">
-              {item.version && <span className="iteration-badge">{item.version}</span>}
+              {/* Top-Right Iteration Badge */}
+              {item.version && <span className="iteration-badge top-right">{item.version}</span>}
+
+              {/* Top-Left Tech Stack Tags (wrapping automatically if needed) */}
+              {item.stack && item.stack.length > 0 && (
+                <div className="card-top-left-stack">
+                  {item.stack.map((tech, idx) => (
+                    <span key={idx} className="tech-badge">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              )}
+
               <ReactMarkdown>{item.text}</ReactMarkdown>
             </section>
           ))}

@@ -58,7 +58,7 @@ a:hover {
 }
 
 .nav-container {
-  max-width: var(--size-content-3);
+  max-width: 900px; /* Unified width */
   margin-inline: auto;
   padding: var(--size-3) var(--size-5);
   display: flex;
@@ -106,7 +106,7 @@ a:hover {
 }
 
 .footer {
-  max-width: var(--size-content-3);
+  max-width: 900px; /* Unified width */
   margin-inline: auto;
   padding: var(--size-6) var(--size-5);
   border-top: var(--border-size-1) solid var(--border-subtle);
@@ -117,7 +117,7 @@ a:hover {
 
 /* Page Container Padding (Prevents cards from hitting screen edges) */
 .layout-container {
-  max-width: var(--size-content-3);
+  max-width: 900px; /* Unified width */
   margin-inline: auto;
   padding-inline: var(--size-5);
   padding-block: var(--size-6);
@@ -144,9 +144,16 @@ a:hover {
   box-shadow: var(--shadow-1);
 }
 
+/* Trim top padding on main content globally so pages don't start too low */
 .main-content {
   min-height: 70vh;
-  padding-block: var(--size-6);
+  padding-block-start: var(--size-3); /* Reduced from var(--size-6) */
+  padding-block-end: var(--size-6);
+}
+
+/* Remove top padding specifically on detail pages */
+.detail-page-container {
+  padding-block-start: 0;
 }
 
 /* Reusable Page Layout & Item Cards */
@@ -194,40 +201,45 @@ a:hover {
   color: var(--accent);
 }
 
+/* Top-left stack container */
+.card-top-left-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--size-2, 0.5rem);
+  margin-bottom: 2rem; /* Creates comfortable spacing down to the markdown header */
+  max-width: calc(100% - 120px); /* Leaves room so badges don't collide with the top-right iteration label */
+}
+
 .multi-iter-layout {
-  max-width: var(--size-content-4); /* Slightly wider to fit the side menu */
+  max-width: 900px;
 }
 
-.project-container {
-  display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: var(--size-6);
-  align-items: start;
-}
-
-/* Sticky indicator sidebar */
-.iteration-nav-sidebar {
-  position: sticky;
-  top: calc(var(--size-7) + 40px);
-  background-color: var(--bg-surface);
-  border: var(--border-size-1) solid var(--border-subtle);
-  border-radius: var(--radius-3);
-  padding: var(--size-4);
+.tech-badge {
+  background-color: var(--surface-2, #f1f5f9);
+  color: var(--text-2, #334155);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-pill, 9999px);
+  font-size: var(--font-size-0, 0.875rem);
+  font-weight: 500;
+  letter-spacing: 0.01em;
 }
 
 .iteration-nav-sidebar h3 {
-  font-size: var(--font-size-1);
+  font-size: var(--font-size-0);
   color: var(--text-heading);
-  margin-block-end: var(--size-3);
+  margin-block-end: var(--size-2);
+  letter-spacing: var(--font-letterspacing-2);
+  padding-inline-start: var(--size-2);
 }
 
+/* Flush alignment: removed indent and reduced font size */
 .iteration-list {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--size-2);
+  gap: var(--size-1);
 }
 
 .iteration-jump-btn {
@@ -235,10 +247,10 @@ a:hover {
   border: none;
   color: var(--text-muted);
   font-family: var(--font-mono);
-  font-size: var(--font-size-0);
+  font-size: var(--font-size-0); 
   text-align: left;
   cursor: pointer;
-  padding: var(--size-2);
+  padding: var(--size-2); 
   width: 100%;
   border-radius: var(--radius-2);
   transition: background-color 0.2s, color 0.2s;
@@ -258,19 +270,34 @@ a:hover {
 
 .iteration-section {
   position: relative;
-  scroll-margin-top: var(--size-8); /* Ensures header isn't hidden under sticky navbar when jumped to */
+  padding-top: 2.75rem; /* Generous top padding so content/headers sit below tags */
 }
 
 .iteration-badge {
   display: inline-block;
   font-family: var(--font-mono);
-  font-size: var(--font-size-0);
+  font-size: var(--font-size-1); /* Increased size */
+  font-weight: var(--font-weight-7); /* Made it bold */
   color: var(--accent);
   background-color: var(--bg-main);
   padding: var(--size-1) var(--size-3);
   border-radius: var(--radius-pill);
   border: var(--border-size-1) solid var(--border-subtle);
   margin-block-end: var(--size-4);
+}
+
+/* Top-right iteration badge anchored cleanly to the card's rounded corner */
+.iteration-badge.top-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-top-right-radius: var(--radius-3, 12px); /* Matches the card's top-right border radius */
+  border-bottom-left-radius: var(--radius-2, 8px);
+  padding: 0.5rem 1rem;
+  background-color: var(--surface-3, #e2e8f0);
+  color: var(--text-1, #0f172a);
+  font-size: var(--font-size-0, 0.875rem);
+  font-weight: 600;
 }
 
 /* Responsive fallback for mobile screens */
@@ -284,6 +311,11 @@ a:hover {
   }
 }
 
+/* Push markdown content inward to fix the left-heavy illusion */
+.markdown-body.subtle-card {
+  padding-inline: var(--size-8); /* Much wider padding on the left/right */
+}
+
 /* Make all body text inside markdown containers smaller */
 .markdown-body p, 
 .markdown-body ul, 
@@ -294,13 +326,26 @@ a:hover {
   margin-block-end: var(--size-4);
 }
 
-/* Add more vertical space under headers inside markdown */
-.markdown-body h1, 
-.markdown-body h2, 
-.markdown-body h3 {
+/* Make markdown headings smaller */
+.markdown-body h1 {
+  font-size: var(--font-size-5); /* Down from default */
   color: var(--text-heading);
-  margin-block-start: var(--size-7);  /* Generous space above */
-  margin-block-end: var(--size-5);    /* Increased vertical space below */
+  margin-block-start: var(--size-7);  
+  margin-block-end: var(--size-5);    
+}
+
+.markdown-body h2 {
+  font-size: var(--font-size-4);
+  color: var(--text-heading);
+  margin-block-start: var(--size-7);  
+  margin-block-end: var(--size-4);    
+}
+
+.markdown-body h3 {
+  font-size: var(--font-size-3);
+  color: var(--text-heading);
+  margin-block-start: var(--size-6);  
+  margin-block-end: var(--size-3);    
 }
 
 /* Prevent any markdown content or code blocks from overflowing horizontally */
@@ -316,17 +361,32 @@ a:hover {
   word-break: break-all;
 }
 
+/* Override Open Props normalize line-length limits */
+.markdown-body p, 
+.markdown-body ul, 
+.markdown-body li, 
+.markdown-body ol,
+.markdown-body h1, 
+.markdown-body h2, 
+.markdown-body h3,
+.markdown-body blockquote {
+  max-inline-size: none; /* Removes the default Open Props character limit */
+  max-width: 100%;       /* Ensures the text expands to the card's inner edge */
+}
+
 /* Ensure the main multi-iteration grid stays strictly within bounds */
 .multi-iter-layout {
   max-width: var(--size-content-4);
-  overflow-x: hidden;
 }
 
+
+/* Tighter grid with a slimmer width allocated for the sidebar column */
 .project-container {
   display: grid;
-  grid-template-columns: 220px minmax(0, 1fr); /* minmax(0, 1fr) stops flex/grid blowouts */
+  grid-template-columns: 180px minmax(0, 1fr);
   gap: var(--size-6);
   align-items: start;
+  position: relative;
 }
 
 /* Enable smooth scrolling globally to prevent jarring layout snaps */
@@ -339,10 +399,17 @@ html {
 }
 
 .detail-top-nav {
+  position: sticky;
+  top: 60px; 
+  z-index: 5; 
+  background-color: var(--bg-main);
+  padding-block: var(--size-2); /* Tighter vertical padding */
+  margin-block-start: 0;        /* Removed the negative margin */
+  margin-block-end: var(--size-4);
+  
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-block-end: var(--size-4);
   flex-wrap: wrap;
   gap: var(--size-3);
 }
@@ -371,15 +438,15 @@ html {
   text-decoration: none;
 }
 
-/* Fully Sticky Iteration Sidebar */
+/* Sticky iteration sidebar */
 .iteration-nav-sidebar {
   position: sticky;
-  /* Matches top navbar height plus breathing room */
-  top: calc(var(--size-7) + 20px); 
+  top: 180px; /* Increased from 140px to clear the taller button row */
   background-color: var(--bg-surface);
   border: var(--border-size-1) solid var(--border-subtle);
   border-radius: var(--radius-3);
-  padding: var(--size-4);
-  max-height: calc(100vh - 120px);
+  padding: var(--size-3);
+  align-self: start;
+  max-height: calc(100vh - 200px); /* Adjusted so the bottom doesn't overflow the screen */
   overflow-y: auto;
 }
