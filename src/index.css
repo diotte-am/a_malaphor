@@ -392,6 +392,7 @@ a:hover {
 /* Enable smooth scrolling globally to prevent jarring layout snaps */
 html {
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
 }
 
 .iteration-section {
