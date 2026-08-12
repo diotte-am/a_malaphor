@@ -106,8 +106,6 @@ a:hover {
 }
 
 .footer {
-  max-width: 900px; /* Unified width */
-  margin-inline: auto;
   padding: var(--size-6) var(--size-5);
   border-top: var(--border-size-1) solid var(--border-subtle);
   color: var(--text-muted);
