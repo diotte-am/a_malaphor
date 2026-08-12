@@ -113,6 +113,10 @@ a:hover {
   color: var(--text-muted);
   font-size: var(--font-size-0);
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 /* Page Container Padding (Prevents cards from hitting screen edges) */
