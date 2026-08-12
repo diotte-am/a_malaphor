@@ -20,24 +20,17 @@
     "description": "Architectural pipelines, backend scripts, data tools, and experimental repositories built with Python, JavaScript, and Neo4j graph databases.",
     "items": [
       {
-        "name": "Entity Graph Extraction Pipeline",
-        "summary": "Multi-iteration transcript parsing and knowledge graph extraction.",
-        "githubUrl": "https://github.com/diotte-am/weird-little-pipeline",
-        "pagesUrl": "Dashboard coming soon.",
-        "url": "/code/graph-pipeline",
-        "iterations": [
-          { 
-            "version": "v2.0 (Current)", 
-            "file": "WLP_2", 
-            "stack": ["Python", "Neo4j", "Local LLM", "LangChain"] 
-          },
-          { 
-            "version": "v1.0 (Initial Prototype)", 
-            "file": "WLP_1", 
-            "stack": ["Python", "Regex"] 
-          }
-        ]
-      },
+    "name": "Entity Graph Extraction Pipeline",
+    "summary": "Multi-iteration transcript parsing and knowledge graph extraction.",
+    "overviewFile": "WLP_0",
+    "githubUrl": "https://github.com/diotte-am/weird-little-pipeline",
+    "pagesUrl": "Dashboard coming soon.",
+    "url": "/code/graph-pipeline",
+    "iterations": [
+      { "version": "v2.0 (Current)", "file": "WLP_2", "stack": ["Python", "Neo4j", "Local LLM", "LangChain"] },
+      { "version": "v1.0 (Initial Prototype)", "file": "WLP_1", "stack": ["Python", "Regex"] }
+    ]
+  },
       {
         "name": "Malden Community Coalition",
         "summary": "A website for the Malden Community Coalition, a local community organization and non-profit I am involved with.",

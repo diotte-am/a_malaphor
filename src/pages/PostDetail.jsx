@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import contentData from '../data/content.json';
+import ProjectOverviewHero from '../components/ProjectOverviewHero';
 
 export default function PostDetail() {
   const { category, slug } = useParams();
   const [contentList, setContentList] = useState([]);
+  const [overviewText, setOverviewText] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const categoryItems = contentData[category]?.items || [];
@@ -19,33 +21,45 @@ export default function PostDetail() {
 
     const markdownFiles = import.meta.glob('../content/**/*.md', { query: '?raw', import: 'default' });
 
+    // Fetch overview file if configured
+    const overviewPromise = project.overviewFile && markdownFiles[`../content/${category}/${project.overviewFile}.md`]
+      ? markdownFiles[`../content/${category}/${project.overviewFile}.md`]().then(text => setOverviewText(text))
+      : Promise.resolve();
+
     if (project.file) {
       const filePath = `../content/${category}/${project.file}.md`;
       if (markdownFiles[filePath]) {
-        markdownFiles[filePath]().then((text) => {
+        Promise.all([overviewPromise, markdownFiles[filePath]()]).then(([_, text]) => {
           setContentList([{ id: project.file, text, stack: project.stack }]);
           setLoading(false);
         });
       } else {
-        setContentList([{ id: 'not-found', text: '*Markdown file not found.*' }]);
-        setLoading(false);
+        overviewPromise.then(() => {
+          setContentList([{ id: 'not-found', text: '*Markdown file not found.*' }]);
+          setLoading(false);
+        });
       }
     } else if (project.iterations) {
-      Promise.all(
-        project.iterations.map(async (iter) => {
-          const filePath = `../content/${category}/${iter.file}.md`;
-          if (markdownFiles[filePath]) {
-            const text = await markdownFiles[filePath]();
-            return { version: iter.version, id: iter.file, text, stack: iter.stack || project.stack };
-          }
-          return { version: iter.version, id: iter.file, text: '*Iteration content missing.*', stack: iter.stack || project.stack };
-        })
-      ).then((results) => {
+      Promise.all([
+        overviewPromise,
+        Promise.all(
+          project.iterations.map(async (iter) => {
+            const filePath = `../content/${category}/${iter.file}.md`;
+            if (markdownFiles[filePath]) {
+              const text = await markdownFiles[filePath]();
+              return { version: iter.version, id: iter.file, text, stack: iter.stack || project.stack };
+            }
+            return { version: iter.version, id: iter.file, text: '*Iteration content missing.*', stack: iter.stack || project.stack };
+          })
+        )
+      ]).then(([_, results]) => {
         setContentList(results);
         setLoading(false);
       });
     } else {
-      setLoading(false);
+      overviewPromise.then(() => {
+        setLoading(false);
+      });
     }
   }, [category, slug, project]);
 
@@ -80,6 +94,9 @@ export default function PostDetail() {
           </div>
         )}
       </div>
+
+      {/* Project Overview Hero Component */}
+      <ProjectOverviewHero overviewText={overviewText} />
 
       <div className={project.iterations ? 'project-container' : ''}>
         {/* Sticky iteration sidebar */}
