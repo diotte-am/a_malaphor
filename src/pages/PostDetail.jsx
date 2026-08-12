@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import contentData from '../data/content.json';
 import ProjectOverviewHero from '../components/ProjectOverviewHero';
+import TechStack from '../components/TechStack';
 
 export default function PostDetail() {
   const { category, slug } = useParams();
@@ -21,7 +22,6 @@ export default function PostDetail() {
 
     const markdownFiles = import.meta.glob('../content/**/*.md', { query: '?raw', import: 'default' });
 
-    // Fetch overview file if configured
     const overviewPromise = project.overviewFile && markdownFiles[`../content/${category}/${project.overviewFile}.md`]
       ? markdownFiles[`../content/${category}/${project.overviewFile}.md`]().then(text => setOverviewText(text))
       : Promise.resolve();
@@ -66,7 +66,7 @@ export default function PostDetail() {
   if (loading) return <div className="layout-container"><p>Loading...</p></div>;
   if (!project) return <div className="layout-container"><h2>Project not found</h2></div>;
 
-  const scrollToIteration = (id) => {
+  const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -78,7 +78,6 @@ export default function PostDetail() {
       <div className="detail-top-nav">
         <Link to={`/${category}`} className="back-link">&larr; Back to {category}</Link>
         
-        {/* GitHub & Pages Badge Links Header */}
         {(project.githubUrl || project.pagesUrl) && (
           <div className="project-links-badge">
             {project.githubUrl && (
@@ -95,19 +94,25 @@ export default function PostDetail() {
         )}
       </div>
 
-      {/* Project Overview Hero Component */}
-      <ProjectOverviewHero overviewText={overviewText} />
-
       <div className={project.iterations ? 'project-container' : ''}>
-        {/* Sticky iteration sidebar */}
+        {/* Sticky sidebar containing Summary + Iterations */}
         {project.iterations && (
           <aside className="iteration-nav-sidebar">
-            <h3>Iterations</h3>
             <ul className="iteration-list">
+              {overviewText && (
+                <li>
+                  <button 
+                    onClick={() => scrollToSection('summary')}
+                    className="iteration-jump-btn summary-nav-btn"
+                  >
+                    Summary
+                  </button>
+                </li>
+              )}
               {project.iterations.map((iter) => (
                 <li key={iter.file}>
                   <button 
-                    onClick={() => scrollToIteration(iter.file)}
+                    onClick={() => scrollToSection(iter.file)}
                     className="iteration-jump-btn"
                   >
                     {iter.version}
@@ -118,27 +123,19 @@ export default function PostDetail() {
           </aside>
         )}
 
-        {/* Content feed */}
-        <div className="iteration-feed">
-          {contentList.map((item) => (
-            <section key={item.id} id={item.id} className="subtle-card markdown-body iteration-section">
-              {/* Top-Right Iteration Badge */}
-              {item.version && <span className="iteration-badge top-right">{item.version}</span>}
+        {/* Main content column holding both hero and feed */}
+        <div className="project-main-column">
+          <ProjectOverviewHero overviewText={overviewText} id="summary" />
 
-              {/* Top-Left Tech Stack Tags (wrapping automatically if needed) */}
-              {item.stack && item.stack.length > 0 && (
-                <div className="card-top-left-stack">
-                  {item.stack.map((tech, idx) => (
-                    <span key={idx} className="tech-badge">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              )}
-
-              <ReactMarkdown>{item.text}</ReactMarkdown>
-            </section>
-          ))}
+          <div className="iteration-feed">
+            {contentList.map((item) => (
+              <section key={item.id} id={item.id} className="subtle-card markdown-body iteration-section">
+                {item.version && <span className="iteration-badge top-right">{item.version}</span>}
+                <TechStack stack={item.stack} />
+                <ReactMarkdown>{item.text}</ReactMarkdown>
+              </section>
+            ))}
+          </div>
         </div>
       </div>
     </div>

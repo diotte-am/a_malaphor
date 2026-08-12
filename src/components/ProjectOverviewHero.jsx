@@ -2,11 +2,11 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import './ProjectOverviewHero.css';
 
-export default function ProjectOverviewHero({ overviewText }) {
+export default function ProjectOverviewHero({ overviewText, id }) {
   if (!overviewText) return null;
 
   return (
-    <section className="project-overview-hero subtle-card markdown-body">
+    <section id={id} className="project-overview-hero markdown-body">
       <ReactMarkdown>{overviewText}</ReactMarkdown>
     </section>
   );

@@ -1,7 +1,7 @@
 .project-overview-hero {
   margin-bottom: var(--size-5, 2rem);
   padding: var(--size-6, 2rem);
-  background-color: var(--surface-1, #ffffff);
-  border-left: 4px solid var(--brand, #2563eb);
-  box-shadow: var(--shadow-2, 0 4px 6px -1px rgba(0, 0, 0, 0.05));
+  background-color: transparent; /* Distinct from card backgrounds */
+  border-bottom: 2px solid var(--surface-3, #cbd5e1); /* Clean structural divider */
+  box-shadow: none;
 }
