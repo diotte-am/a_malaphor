@@ -6,7 +6,7 @@ The goal for Iteration 1 was simple: establish a functional, deterministic batch
 
 ---
 
-## 🏗️ The Architecture Overview
+## The Architecture Overview
 
 The system is split into three clean, decoupled layers to prevent codebase clutter and ensure maintainability:
 
@@ -23,7 +23,7 @@ The system is split into three clean, decoupled layers to prevent codebase clutt
 
 ---
 
-## 🛑 Core Engineering Challenges & Breakthroughs
+## Core Engineering Challenges & Breakthroughs
 
 ### 1. The Monolithic Context Bottleneck
 * **The Problem:** Passing an entire 45-minute transcript text block to a local LLM in one go crashed the context window, caused severe hallucinations, or missed fine-grained entity intersections entirely.
@@ -74,14 +74,14 @@ ORDER BY timestamp ASC
 
 ---
 
-## 🎯 Iteration 1 Architectural Decisions
+## Iteration 1 Architectural Decisions
 
 * **Completion Marker State Files (`.done`):** Rather than keeping processing state in-memory or constantly querying the DB to check if an episode is finished, the runner drops a tiny `{episode_id}.done` log file. If it exists, the runner skips the file instantly, making crashes completely safe to resume.
 * **Schema-Agnostic Database Code:** Node label variables are completely dynamic. They map directly from the LLM response object rather than hardcoded string parameters. If I decide to update my entity taxonomy tomorrow, I only update the system prompt; my pipeline infrastructure remains entirely untouched.
 
 ---
 
-## 🚀 Next Steps for Iteration 2
+## Next Steps for Iteration 2
 
 With the foundational pipeline safely ingesting data, the next phase will focus on improving the fidelity of the data being extracted:
 * **The Human-In-The-Loop Feedback Loop:** Setting up a rapid iteration cycle where I audit the generated Markdown evaluation log against actual audio playback, shifting modifications away from code architecture into prompt few-shot tuning.

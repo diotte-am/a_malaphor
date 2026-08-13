@@ -1,8 +1,5 @@
 # Malden Community Coalition Platform: Architectural Case Study
 
-> **Author:** Amare
-> **Stack:** React, Vite, React Router, i18next, Open Props, GitHub Actions
-
 ---
 
 ## 1. Project Overview & The Core Challenge
