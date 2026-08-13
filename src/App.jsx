@@ -22,8 +22,8 @@ export default function App() {
           <Route path="/teach" element={<Teach />} />
           <Route path="/collaborate" element={<Collaborate />} />
           
-          {/* This dynamic route handles all /category/slug details */}
-          <Route path="/:category/:slug" element={<PostDetail />} />
+          {/* This dynamic route handles all /category/phase/slug details */}
+          <Route path="/:category/:slug/:phaseSlug?" element={<PostDetail />} />
         </Routes>
       </main>
       <Footer />

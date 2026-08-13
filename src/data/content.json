@@ -20,26 +20,56 @@
     "description": "Architectural pipelines, backend scripts, data tools, and experimental repositories built with Python, JavaScript, and Neo4j graph databases.",
     "items": [
       {
-    "name": "Entity Graph Extraction Pipeline",
-    "summary": "Multi-iteration transcript parsing and knowledge graph extraction.",
-    "overviewFile": "WLP_0",
-    "githubUrl": "https://github.com/diotte-am/weird-little-pipeline",
-    "pagesUrl": "Dashboard coming soon.",
-    "url": "/code/graph-pipeline",
-    "iterations": [
-      { "version": "v2.0 (Current)", "file": "WLP_2", "stack": ["Python", "Neo4j", "Local LLM", "LangChain"] },
-      { "version": "v1.0 (Initial Prototype)", "file": "WLP_1", "stack": ["Python", "Regex"] }
-    ]
-  },
+        "name": "Entity Graph Extraction Pipeline",
+        "summary": "Multi-iteration transcript parsing, knowledge graph extraction, and RAG architecture.",
+        "overviewFile": "WLP_0",
+        "githubUrl": "https://github.com/diotte-am/weird-little-pipeline",
+        "pagesUrl": "Dashboard coming soon.",
+        "url": "/code/graph-pipeline",
+        "phases": [
+          {
+            "name": "Graph Database Phase",
+            "summary": "Multi-iteration transcript parsing and Neo4j knowledge graph extraction.",
+            "url": "/code/graph-pipeline/database",
+            "stack": ["Python", "Neo4j", "Local LLM", "LangChain", "Regex"],
+            "iterations": [
+              { "version": "v2.0 (Current)", "file": "WLP_2" },
+              { "version": "v1.0 (Initial Prototype)", "file": "WLP_1" }
+            ]
+          },
+          {
+            "name": "RAG System Phase",
+            "summary": "Retrieval-Augmented Generation implementation leveraging the knowledge graph.",
+            "url": "/code/graph-pipeline/rag",
+            "file": "RAG_1",
+            "stack": ["Python", "LangChain", "Vector Store"]
+          }
+        ]
+      },
       {
-        "name": "Malden Community Coalition",
-        "summary": "A website for the Malden Community Coalition, a local community organization and non-profit I am involved with.",
-        "stack": ["React", "Vite", "React Router", "i18next", "Open Props", "GitHub Actions"],
-        "githubUrl": "https://github.com/diotte-am/malden-community-coalition",
-        "pagesUrl": "https://maldencommunitycoalition.org",
-        "url": "/code/malden-coalition",
-        "file": "MCoCo_1"
-      }
+      "name": "Malden Community Coalition",
+      "summary": "Technical coordination, digital infrastructure, and automation for local non-profit outreach.",
+      "overviewFile": "MCOCO_0",
+      "githubUrl": "https://github.com/diotte-am/malden-community-coalition",
+      "pagesUrl": "https://www.maldencommunitycoalition.org/",
+      "url": "/code/malden-community-coalition",
+      "phases": [
+        {
+          "name": "Website",
+          "summary": "Core digital infrastructure, resource databases, and maintenance.",
+          "url": "/code/malden-community-coalition/website",
+          "file": "MCOCO_WEB",
+          "stack": ["React", "Vite", "JavaScript"]
+        },
+        {
+          "name": "Social Media Automation",
+          "summary": "Automated content scheduling and social media outreach pipelines.",
+          "url": "/code/malden-community-coalition/automation",
+          "file": "MCOCO_AUTO",
+          "stack": ["Python", "API Integration"]
+        }
+      ]
+    }
     ]
   },
   "make": {

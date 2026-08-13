@@ -1,7 +1,17 @@
 .project-overview-hero {
   margin-bottom: var(--size-5, 2rem);
   padding: var(--size-6, 2rem);
-  background-color: transparent; /* Distinct from card backgrounds */
-  border-bottom: 2px solid var(--surface-3, #cbd5e1); /* Clean structural divider */
+  background-color: transparent;
+  border-bottom: 2px solid var(--surface-3, #cbd5e1);
   box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-3, 0.75rem);
+}
+
+.overview-tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--size-2, 0.5rem);
+  margin-bottom: var(--size-2, 0.5rem);
 }
