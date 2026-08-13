@@ -12,5 +12,3 @@ export default function Make() {
 // below are iterations as blog entries. 
 // different smaller font
 // bett looing hero
-
-//
